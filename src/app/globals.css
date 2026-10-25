@@ -1,15 +1,111 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root { --charcoal:#171613; --ink:#0D0D0C; --coffee:#38271F; --espresso:#211713; --cream:#F0E7D8; --sand:#C7B49A; --soft:#FAF8F3; }
-html { background: var(--soft); color: var(--espresso); -webkit-text-size-adjust: 100%; }
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-body { font-family: var(--font-sans), system-ui, sans-serif; overflow-x: clip; }
-:focus-visible { outline: 2px solid #9A5B22; outline-offset: 4px; }
-.display { font-family: var(--font-serif), Georgia, serif; font-weight: 300; line-height: 0.92; letter-spacing: -0.03em; }
-.label { font-family: var(--font-mono), monospace; font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; }
-.grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.line-mask { display:block; overflow:hidden; padding-bottom:.08em; }
-@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; } }
+/* ----------------------------------------
+   Theme variables
+---------------------------------------- */
+:root {
+  --charcoal: #171613;
+  --ink: #0d0d0c;
+  --coffee: #38271f;
+  --espresso: #211713;
+  --cream: #f0e7d8;
+  --sand: #c7b49a;
+  --soft: #faf8f3;
+}
+/* ----------------------------------------
+   Base document styles
+---------------------------------------- */
+html {
+  min-height: 100%;
+  background: var(--soft);
+  color: var(--espresso);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
+}
+body {
+  min-height: 100%;
+  margin: 0;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* Prevent horizontal overflow without blocking vertical scrolling */
+  overflow-x: clip;
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
+}
+/* ----------------------------------------
+   Lenis smooth scrolling
+---------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+/* ----------------------------------------
+   Focus accessibility
+---------------------------------------- */
+:focus-visible {
+  outline: 2px solid #9a5b22;
+  outline-offset: 4px;
+}
+/* ----------------------------------------
+   Typography
+---------------------------------------- */
+.display {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+.label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+/* ----------------------------------------
+   Text animation masks
+---------------------------------------- */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+/* ----------------------------------------
+   Grain overlay
+---------------------------------------- */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* ----------------------------------------
+   Mobile scrolling
+---------------------------------------- */
+@media (max-width: 767px) {
+  html,
+  body {
+    overscroll-behavior-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+/* ----------------------------------------
+   Reduced motion accessibility
+---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

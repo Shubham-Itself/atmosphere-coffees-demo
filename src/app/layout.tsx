@@ -6,6 +6,8 @@ import Intro from "@/components/Intro";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import TasterSection from "@/components/sections/TasterSection";
+import TasterPopup from "@/components/TasterPopup";
 
 const serif = Fraunces({ subsets: ["latin"], variable: "--font-serif", axes: ["opsz"], style: ["normal", "italic"], display: "swap" });
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -21,8 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-espresso focus:px-4 focus:py-2 focus:text-soft">Skip to content</a>
         <Intro /><SmoothScroll />
         <Navbar />
-        <main id="main">{children}</main>
+        <main id="main">{children}<TasterSection /></main>
         <Footer />
+        <TasterPopup />
       </body>
     </html>
   );

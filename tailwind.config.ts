@@ -6,5 +6,6 @@ const config: Config = {
     fontFamily: { serif: ["var(--font-serif)", "Georgia", "serif"], sans: ["var(--font-sans)", "system-ui", "sans-serif"], mono: ["var(--font-mono)", "ui-monospace", "monospace"] },
   } },
   plugins: [],
+  future: { hoverOnlyWhenSupported: true },
 };
 export default config;

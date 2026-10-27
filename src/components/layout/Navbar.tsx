@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { lenisRef } from "@/lib/lenis";
 import SmoothLink from "@/components/ui/SmoothLink";
 
-const links = [{ href: "/#philosophy", label: "Our Philosophy" }, { href: "/#moods", label: "The Moods" }, { href: "/#about", label: "About" }, { href: "/#faq", label: "FAQ" }];
+const links = [{ href: "/moods", label: "The Moods" }, { href: "/ritual", label: "The Ritual" }, { href: "/about", label: "About" }, { href: "/about#faq", label: "FAQ" }];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -36,14 +36,14 @@ export default function Navbar() {
     return () => { html.style.overflow = prev; lenisRef.current?.start(); window.removeEventListener("keydown", onKey); mq.removeEventListener("change", onMq); };
   }, [open]);
 
-  const all = [...links, { href: "/#collection", label: "Explore the Collection" }];
+  const all = [...links, { href: "#taster", label: "Book a Free Taster" }];
   return (<>
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${open || scrolled ? "border-b border-espresso/10 bg-soft/90 backdrop-blur" : "border-b border-transparent"}`} style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <nav aria-label="Primary" className="flex h-16 items-center justify-between px-[6vw] text-espresso">
         <SmoothLink href="/" onNavigate={close} className="display text-xl">Atmosphere<em className="font-light"> Coffees</em></SmoothLink>
         <ul className="hidden items-center gap-8 md:flex">
           {links.map((l) => <li key={l.href}><SmoothLink className="label transition-colors hover:text-caramel" href={l.href}>{l.label}</SmoothLink></li>)}
-          <li><SmoothLink className="label border-b border-current pb-1" href="/#collection">Explore the Collection</SmoothLink></li>
+          <li><SmoothLink className="label border-b border-current pb-1" href="#taster">Free Taster</SmoothLink></li>
         </ul>
         <button ref={btn} type="button" className="relative -mr-3 h-11 w-11 md:hidden" aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((o) => !o)}>
           <span aria-hidden className={`absolute left-1/2 top-1/2 block h-px w-6 -translate-x-1/2 bg-current transition-transform duration-300 ${open ? "rotate-45" : "-translate-y-[4px]"}`} />

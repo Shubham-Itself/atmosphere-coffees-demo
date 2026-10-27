@@ -13,7 +13,6 @@ export interface Mood {
   recommendation: string;
   image: string; // Added
 }
-const note = "Atmosphere Coffees is a brand concept, so specific coffees are still to be defined.";
 export const moods: Mood[] = [
   {
     id: "focus",
@@ -27,7 +26,7 @@ export const moods: Mood[] = [
     fg: "#0B1530",
     accent: "#2C4A8A",
     image: "/main-images/focus-final.webp",
-    recommendation: `A quiet, concentrated atmosphere: midnight tones and crisp edges. ${note}`,
+    recommendation: "A quiet, concentrated atmosphere: midnight tones and crisp edges.",
   },
   {
     id: "uplift",
@@ -41,7 +40,7 @@ export const moods: Mood[] = [
     fg: "#2B1D10",
     accent: "#B5620A",
     image: "/main-images/uplift-final.webp",
-    recommendation: `A sunrise atmosphere: golden light and gentle shadows. ${note}`,
+    recommendation: "A sunrise atmosphere: golden light and gentle shadows.",
   },
   {
     id: "calm",
@@ -55,7 +54,7 @@ export const moods: Mood[] = [
     fg: "#1B3B50",
     accent: "#4A93C4",
     image: "/main-images/calm-final.webp",
-    recommendation: `A misty atmosphere: soft sage and open space. ${note}`,
+    recommendation: "A misty atmosphere: soft blue and open space.",
   },
   {
     id: "energize",
@@ -69,7 +68,7 @@ export const moods: Mood[] = [
     fg: "#3A1A08",
     accent: "#C8470F",
     image: "/main-images/energize-final.webp",
-    recommendation: `A high-contrast atmosphere: burnt orange and confident motion. ${note}`,
+    recommendation: "A high-contrast atmosphere: burnt orange and confident motion.",
   },
   {
     id: "indulge",
@@ -83,6 +82,6 @@ export const moods: Mood[] = [
     fg: "#3A1512",
     accent: "#8A2B3A",
     image: "/main-images/indulge-final.webp",
-    recommendation: `An intimate atmosphere: chocolate, burgundy and caramel light. ${note}`,
+    recommendation: "An intimate atmosphere: chocolate, burgundy and caramel light.",
   },
 ];

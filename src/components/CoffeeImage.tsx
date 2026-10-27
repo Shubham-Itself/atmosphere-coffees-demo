@@ -32,7 +32,7 @@ export default function CoffeeImage({
           />
         </mesh>
       </Billboard>
-      <Html
+      {name && <Html
         center
         position={[0, height / 2 + 0.08, 0]}
         style={{
@@ -44,7 +44,7 @@ export default function CoffeeImage({
         <span className="label whitespace-nowrap text-espresso/70">
           {index} {name}
         </span>
-      </Html>
+      </Html>}
     </group>
   );
 }

@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
 import Reveal from "@/components/ui/Reveal";
-const faqs = [
-  ["How do I try Atmosphere Coffees?", "Book a free taster below. Pick up to two moods and we’ll get in touch to arrange it."],
+import { CONTACT_EMAIL } from "@/lib/contact";
+const faqs: [string, ReactNode][] = [
+  ["How do I try Atmosphere Coffees?", "Book a free taster below: choose up to two moods to sample at no cost, and we’ll contact you to arrange it."],
   ["What are the five moods?", "Focus, Uplift, Calm, Energize and Indulge: five ways to start choosing coffee by how you want to feel."],
   ["Where will the coffee come from?", "Sourcing, roasts and product details haven’t been defined yet. We won’t publish claims until they are real."],
-  ["How can I get in touch?", "Email us at atmospherecoffeesmgt@gmail.com."],
+  ["How can I get in touch?", <>Email us at <a className="underline underline-offset-4 hover:text-caramel" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</>],
 ];
 export default function FaqSection() {
   return (

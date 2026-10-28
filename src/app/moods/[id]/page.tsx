@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,8 +49,8 @@ export default async function MoodPage({ params }: Props) {
           </div>
         </Reveal>
         <div className="relative mx-auto aspect-[1084/1451] h-[42svh] lg:h-[72vh]">
-          <div aria-hidden className="absolute -inset-1/4 rounded-full blur-2xl" style={{ background: `radial-gradient(circle, ${m.accent}59 0%, ${m.accent}00 65%)` }} />
-          <div aria-hidden className="absolute -bottom-[7%] left-1/2 h-[6%] w-[70%] -translate-x-1/2 rounded-[50%] blur-xl" style={{ background: m.fg, opacity: 0.28 }} />
+          <div aria-hidden className="absolute -inset-1/4" style={{ background: `radial-gradient(circle, ${m.accent}59 0%, ${m.accent}00 65%)` }} />
+          <div aria-hidden className="absolute -bottom-[9%] left-1/2 h-[10%] w-[85%] -translate-x-1/2" style={{ background: `radial-gradient(closest-side, ${m.fg}, transparent)`, opacity: 0.3 }} />
           <div className="relative h-full w-full animate-[mood-float_7s_ease-in-out_infinite] motion-reduce:animate-none">
             <Image src={m.image} alt={`${m.name} packaging`} fill priority sizes="(min-width: 1024px) 40vw, 60vw" className="object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.25)]" />
           </div>
@@ -58,14 +59,25 @@ export default async function MoodPage({ params }: Props) {
     </article>
 
     <nav aria-label="More moods" className="grid md:grid-cols-2">
-      {[{ label: "Previous mood", mood: prev, Icon: ArrowLeft }, { label: "Next mood", mood: next, Icon: ArrowRight }].map(({ label, mood, Icon }) => (
-        <Link key={label} href={`/moods/${mood.id}`} className="group relative flex min-h-56 flex-col justify-between overflow-hidden px-[6vw] py-10 md:px-12" style={{ background: mood.bg, color: mood.fg }}>
-          <div aria-hidden className="absolute inset-0 opacity-50 transition-transform duration-700 group-hover:scale-110 motion-reduce:transition-none"><MoodArt id={mood.id} accent={mood.accent} /></div>
-          <p className="label relative flex items-center gap-2"><Icon size={14} aria-hidden />{label}</p>
-          <div className="relative">
-            <p className="display text-[clamp(2.5rem,5vw,4.5rem)]" style={{ color: mood.accent }}>{mood.name}</p>
-            <p className="mt-1 opacity-80">{mood.headline}</p>
+      {[{ label: "Previous mood", mood: prev, Icon: ArrowLeft, nudge: "group-hover:-translate-x-1 group-focus-visible:-translate-x-1" }, { label: "Next mood", mood: next, Icon: ArrowRight, nudge: "group-hover:translate-x-1 group-focus-visible:translate-x-1" }].map(({ label, mood, Icon, nudge }) => (
+        // Hover changes only the text (name nudges, accent underline draws in) and the arrow (fills with the accent);
+        // the card itself stays put. Colours come in as CSS variables so Tailwind hover classes can use them.
+        <Link key={label} href={`/moods/${mood.id}`} className="group relative flex min-h-56 items-end justify-between gap-6 overflow-hidden px-[6vw] py-10 md:min-h-64 md:px-12"
+          style={{ background: mood.bg, color: mood.fg, "--accent": mood.accent, "--on": "#FAF8F3" } as CSSProperties}>
+          <div aria-hidden className="absolute inset-0 opacity-50"><MoodArt id={mood.id} accent={mood.accent} /></div>
+          <div className="relative flex h-full flex-col justify-between gap-10 self-stretch">
+            <p className="label opacity-70">{label}</p>
+            <div className={`transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none ${nudge}`}>
+              <p className="display relative inline-block text-[clamp(2.5rem,5vw,4.5rem)] text-[var(--accent)]">
+                {mood.name}
+                <span aria-hidden className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-[var(--accent)] transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none" />
+              </p>
+              <p className="mt-2 opacity-80 transition-opacity duration-500 group-hover:opacity-100">{mood.headline}</p>
+            </div>
           </div>
+          <span aria-hidden className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-current transition-colors duration-500 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-[var(--on)] group-focus-visible:border-[var(--accent)] group-focus-visible:bg-[var(--accent)] group-focus-visible:text-[var(--on)]">
+            <Icon size={20} className={`transition-transform duration-500 ${nudge}`} />
+          </span>
         </Link>))}
     </nav>
   </>);

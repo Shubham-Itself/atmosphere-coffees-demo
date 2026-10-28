@@ -17,7 +17,7 @@ const BEANS = [[6, 70, 22, -30], [18, 84, 16, 40], [74, 78, 20, 70], [86, 64, 15
 function CoffeeCup() {
   return (
     <div aria-hidden className="relative mx-auto mt-8 aspect-[5/4] w-56 lg:mt-12 lg:w-72">
-      <div className="absolute inset-[10%] rounded-full blur-2xl" style={{ background: "radial-gradient(circle, #E0901F55, transparent 65%)" }} />
+      <div className="absolute inset-[10%]" style={{ background: "radial-gradient(circle, #E0901F55, transparent 65%)" }} />
       <svg viewBox="0 0 200 160" className="relative h-full w-full">
         <g fill="none" stroke="#F0E7D8" strokeWidth="3" strokeLinecap="round" opacity="0.55">
           {["M84 50c-7-9 7-14 0-24", "M100 46c-7-10 7-16 0-28", "M116 50c-7-9 7-14 0-24"].map((d, i) => (
@@ -42,6 +42,7 @@ export default function MoodDiscovery() {
   const chips = useRef<(HTMLButtonElement | null)[]>([]);
   const chipRow = useRef<HTMLDivElement>(null);
   const touch = useRef<{ x: number; y: number } | null>(null);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const result = useRef<HTMLDivElement>(null);
   const mood = moods[sel];
   const c = mood ?? EMPTY;
@@ -58,6 +59,10 @@ export default function MoodDiscovery() {
     const row = chipRow.current, chip = chips.current[i];
     if (row && chip && row.offsetParent) row.scrollTo({ left: chip.offsetLeft - (row.clientWidth - chip.offsetWidth) / 2, behavior: reduced ? "auto" : "smooth" });
   };
+  /** Desktop: hovering a feeling selects it, after a short pause so sweeping across rows doesn't flicker. */
+  const hoverPick = (i: number) => { clearTimeout(hoverTimer.current); hoverTimer.current = setTimeout(() => pick(i), 90); };
+  const hoverCancel = () => clearTimeout(hoverTimer.current);
+  useEffect(() => () => clearTimeout(hoverTimer.current), []);
   const surprise = () => { const n = moods.length; pick((Math.max(sel, 0) + 1 + Math.floor(Math.random() * (n - 1))) % n); };
   const step = (d: number) => pick(sel < 0 ? (d > 0 ? 0 : moods.length - 1) : (sel + d + moods.length) % moods.length);
   /** Mobile: swipe the card sideways to move between moods; vertical drags still scroll the page. */
@@ -102,7 +107,8 @@ export default function MoodDiscovery() {
             {moods.map((m, i) => (
               <button key={m.id} ref={(el) => { opts.current[i] = el; }} type="button" role="radio" aria-checked={sel === i}
                 tabIndex={sel === i || (sel < 0 && i === 0) ? 0 : -1}
-                onClick={() => pick(i)} onKeyDown={(e) => onKey(e, i, opts)}
+                onClick={() => { hoverCancel(); pick(i); }} onKeyDown={(e) => onKey(e, i, opts)}
+                onMouseEnter={() => hoverPick(i)} onMouseLeave={hoverCancel}
                 className="group relative flex min-h-11 w-full items-center gap-5 overflow-hidden border-b border-espresso/15 py-4 text-left">
                 <span aria-hidden className="absolute inset-0 origin-left scale-x-0 transition-transform duration-700 group-aria-checked:scale-x-100 motion-reduce:transition-none"
                   style={{ background: m.accent, opacity: 0.1, transitionTimingFunction: EASE }} />

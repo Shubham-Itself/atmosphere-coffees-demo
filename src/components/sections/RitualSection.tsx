@@ -58,7 +58,7 @@ export default function RitualSection() {
                   <span className="label block animate-[ritual-jitter_1.6s_steps(2)_infinite] whitespace-nowrap rounded-full border border-espresso/20 px-3 py-1.5 text-espresso/60"
                     style={{ rotate: `${r}deg`, animationDelay: `${-(l + t) / 40}s` }}>{w}</span>
                 </span>))}
-              <div data-glow className="absolute inset-[12%] scale-75 rounded-full opacity-0 blur-3xl" style={{ background: "radial-gradient(circle, #E0901F66 0%, transparent 65%)" }} />
+              <div data-glow className="absolute inset-[12%] scale-75 opacity-0" style={{ background: "radial-gradient(circle, #E0901F66 0%, transparent 65%)" }} />
               <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" className="absolute inset-0 h-full w-full text-caramel">
                 <g className="origin-center animate-[ritual-breathe_6s_ease-in-out_infinite]">
                   <circle data-ring cx="100" cy="100" r="84" strokeWidth="0.5" pathLength={1} strokeDasharray="1" strokeDashoffset="1" />

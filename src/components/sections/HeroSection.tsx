@@ -35,7 +35,7 @@ export default function HeroSection() {
           <p data-fade className="max-w-sm text-lg text-espresso/80">Not just what you want to taste.<br />How you want to feel.</p>
           <div data-fade className="flex flex-col gap-3 sm:flex-row">
             <Button href="#taster">Book a free taster</Button>
-            <Button href="/moods" variant="line">Explore the Moods</Button>
+            <Button href="/moods" variant="line">Explore the moods</Button>
           </div>
         </div>
       </div>

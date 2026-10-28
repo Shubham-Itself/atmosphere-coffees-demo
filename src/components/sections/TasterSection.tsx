@@ -107,7 +107,7 @@ export default function TasterSection() {
         <div>
           <p className="label mb-5 flex items-center gap-3 text-caramel"><span aria-hidden className="h-px w-8 bg-current" />Free taster</p>
           <h2 id="taster-h" className="display text-[clamp(2.75rem,6vw,5.5rem)]">Book a free <em className="text-caramel">taster.</em></h2>
-          <p className="mt-6 max-w-sm text-lg opacity-75">Pick up to two moods and we’ll get in touch to arrange your taster.</p>
+          <p className="mt-6 max-w-sm text-lg opacity-75">Choose up to two moods to sample, completely free. Leave your details and we’ll contact you to arrange it.</p>
         </div>
 
         {status === "sent" ? (
@@ -153,6 +153,7 @@ export default function TasterSection() {
               Book my free taster
               <ArrowUpRight size={14} aria-hidden className="transition-transform duration-300 group-hover:-translate-x-[-2px] group-hover:-translate-y-0.5" />
             </button>
+            <p className="-mt-4 text-sm opacity-60">We’ll only use your details to arrange your taster.</p>
           </form>
         )}
       </div>

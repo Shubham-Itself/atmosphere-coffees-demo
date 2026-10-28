@@ -3,7 +3,7 @@ import BrandStorySection from "@/components/sections/BrandStorySection";
 import FaqSection from "@/components/sections/FaqSection";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About us",
   description: "Atmosphere Coffees began with a simple question: what if coffee could be chosen by the mood you want to create?",
   alternates: { canonical: "/about" },
 };

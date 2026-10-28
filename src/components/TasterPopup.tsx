@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { onIntroDone } from "@/lib/intro";
-import { lenisRef } from "@/lib/lenis";
+import { lockScroll } from "@/lib/scrollLock";
 import SmoothLink from "@/components/ui/SmoothLink";
 import Bean from "@/components/ui/Bean";
 
@@ -17,6 +17,7 @@ const BEANS = [
 /** One-time "book a free taster" invite, shown shortly after a visitor's first landing (after the intro). */
 export default function TasterPopup() {
   const dialog = useRef<HTMLDialogElement>(null);
+  const unlock = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     let seen = false;
@@ -28,23 +29,23 @@ export default function TasterPopup() {
       timer = setTimeout(() => {
         const d = dialog.current;
         if (!d || d.open) return;
-        d.showModal(); lenisRef.current?.stop();
-        document.documentElement.style.overflow = "hidden"; // iOS keeps scrolling the page behind a modal dialog
+        d.showModal();
+        unlock.current = lockScroll(); // iOS keeps scrolling the page behind a modal dialog
         try { localStorage.setItem(KEY, "1"); } catch {}
       }, DELAY);
     });
-    return () => { dead = true; clearTimeout(timer); };
+    return () => { dead = true; clearTimeout(timer); unlock.current?.(); };
   }, []);
 
   const close = () => dialog.current?.close();
 
   return (
-    <dialog ref={dialog} aria-labelledby="popup-h" onClose={() => { document.documentElement.style.overflow = ""; lenisRef.current?.start(); }}
+    <dialog ref={dialog} aria-labelledby="popup-h" onClose={() => { unlock.current?.(); unlock.current = null; }}
       onClick={(e) => { if (e.target === e.currentTarget) close(); }}
       className="m-auto max-h-[90svh] w-[min(92vw,720px)] overflow-y-auto overscroll-contain rounded-[24px] bg-soft p-0 text-espresso shadow-[0_40px_100px_-30px_rgba(0,0,0,0.6)] backdrop:bg-espresso/60 backdrop:backdrop-blur-sm open:animate-[taster-pop_0.6s_cubic-bezier(.22,1,.36,1)] motion-reduce:open:animate-none">
       <div className="grid sm:grid-cols-[0.8fr_1.2fr]">
         <div aria-hidden className="relative h-28 overflow-hidden sm:h-auto" style={{ background: "radial-gradient(circle at 35% 30%, #4A2C1C, #211713 70%)" }}>
-          <div className="absolute left-1/2 top-1/2 aspect-square w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, #E0901F55, transparent 65%)" }} />
+          <div className="absolute left-1/2 top-1/2 aspect-square w-[80%] -translate-x-1/2 -translate-y-1/2" style={{ background: "radial-gradient(circle, #E0901F55, transparent 65%)" }} />
           {BEANS.map(([x, y, size, rot, dur, delay], i) => (
             <div key={i} className="absolute animate-[bean-float_ease-in-out_infinite] motion-reduce:animate-none" style={{ left: `${x}%`, top: `${y}%`, animationDuration: `${dur}s`, animationDelay: `${delay}s` }}>
               <Bean size={size} className="drop-shadow-[0_10px_12px_rgba(0,0,0,0.45)]" style={{ rotate: `${rot}deg` }} />
@@ -54,7 +55,7 @@ export default function TasterPopup() {
           <button type="button" onClick={close} aria-label="Close" className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100"><X size={20} /></button>
           <p className="label flex items-center gap-3 text-caramel"><span aria-hidden className="h-px w-8 bg-current" />Free taster</p>
           <h2 id="popup-h" className="display mt-4 text-[clamp(2.5rem,6vw,3.75rem)]">Try your mood, <em className="text-caramel">on us.</em></h2>
-          <p className="mt-4 max-w-xs opacity-75">Pick up to two moods and we’ll arrange a free taster for you.</p>
+          <p className="mt-4 max-w-xs opacity-75">Choose up to two moods to sample, completely free. We’ll contact you to arrange it.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <SmoothLink href="#taster" onNavigate={close}
               className="group inline-flex min-h-12 items-center justify-center gap-3 bg-espresso px-7 text-xs uppercase tracking-[0.2em] text-soft transition-colors hover:bg-coffee">

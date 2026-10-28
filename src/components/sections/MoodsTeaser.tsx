@@ -15,7 +15,7 @@ export default function MoodsTeaser() {
           <h2 id="moods-h" className="display text-[clamp(2.75rem,7vw,6.5rem)]">Find your <em className="text-caramel">atmosphere.</em></h2>
         </div>
         <Link href="/moods" className="label group flex min-h-11 items-center gap-2 border-b border-current pb-1 self-start md:self-auto">
-          View the collection <ArrowUpRight size={14} aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          View all moods <ArrowUpRight size={14} aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
       </Reveal>
 
@@ -26,7 +26,7 @@ export default function MoodsTeaser() {
               style={{ background: m.bg, color: m.fg }}>
               <div aria-hidden className="absolute inset-0 opacity-60 transition-transform duration-700 group-hover:scale-110 motion-reduce:transition-none"><MoodArt id={m.id} accent={m.accent} /></div>
               <div aria-hidden className="absolute inset-x-[16%] top-[12%] bottom-[30%]">
-                <div className="absolute inset-[5%] rounded-full blur-2xl" style={{ background: `radial-gradient(circle, ${m.accent}59 0%, ${m.accent}00 65%)` }} />
+                <div className="absolute inset-[5%]" style={{ background: `radial-gradient(circle, ${m.accent}59 0%, ${m.accent}00 65%)` }} />
                 <Image src={m.image} alt="" fill sizes="(min-width: 1024px) 14vw, 45vw"
                   className="object-contain drop-shadow-[0_20px_24px_rgba(0,0,0,0.25)] transition-transform duration-700 group-hover:-translate-y-2 group-hover:-rotate-3 group-hover:scale-105 motion-reduce:transition-none" />
               </div>

@@ -3,8 +3,8 @@ import { moods } from "@/lib/moods";
 import { CONTACT_EMAIL } from "@/lib/contact";
 
 const columns: [string, [string, string][]][] = [
-  ["Explore", [["Home", "/"], ["Philosophy", "/#philosophy"], ["Discover your mood", "/#discover"], ["The Ritual", "/ritual"], ["About", "/about"], ["FAQ", "/about#faq"]]],
-  ["The Moods", [["All moods", "/moods"], ...moods.map((m): [string, string] => [m.name, `/moods/${m.id}`])]],
+  ["Explore", [["Home", "/"], ["Philosophy", "/#philosophy"], ["Discover your mood", "/#discover"], ["The ritual", "/ritual"], ["About us", "/about"], ["FAQ", "/about#faq"]]],
+  ["The moods", [["All moods", "/moods"], ...moods.map((m): [string, string] => [m.name, `/moods/${m.id}`])]],
 ];
 
 export default function Footer() {

@@ -67,7 +67,7 @@ export default function MoodCollection() {
     <section id="moods" ref={root} aria-labelledby="moods-h" className="relative overflow-clip bg-soft text-espresso">
       <div ref={track} className="relative flex flex-col lg:w-max lg:flex-row">
         <header data-panel className="relative flex min-h-[90svh] flex-col justify-between px-[6vw] pb-16 pt-28 lg:h-screen lg:w-[78vw] lg:pb-24">
-          <p className="label flex items-center gap-3 text-caramel"><span aria-hidden className="h-px w-8 bg-current" />The collection</p>
+          <p className="label flex items-center gap-3 text-caramel"><span aria-hidden className="h-px w-8 bg-current" />The moods</p>
           <div className="mt-12">
             <h1 id="moods-h" className="display text-[clamp(3.25rem,9vw,9.5rem)]">Find your <em className="text-caramel">atmosphere.</em></h1>
             <p className="mt-6 max-w-sm text-lg opacity-70">Five moods. Five different ways to experience coffee.</p>
@@ -102,8 +102,8 @@ export default function MoodCollection() {
 
             <div className="relative my-4 flex flex-1 items-center justify-center lg:absolute lg:inset-y-0 lg:right-[6vw] lg:my-0 lg:w-[42vw]">
               <div data-bag className="relative aspect-[1084/1451] h-[30svh] min-h-44 lg:h-[64vh]">
-                <div aria-hidden className="absolute -inset-1/4 rounded-full blur-2xl" style={{ background: `radial-gradient(circle, ${m.accent}59 0%, ${m.accent}00 65%)` }} />
-                <div aria-hidden className="absolute -bottom-[7%] left-1/2 h-[6%] w-[70%] -translate-x-1/2 rounded-[50%] blur-xl" style={{ background: m.fg, opacity: 0.28 }} />
+                <div aria-hidden className="absolute -inset-1/4" style={{ background: `radial-gradient(circle, ${m.accent}59 0%, ${m.accent}00 65%)` }} />
+                <div aria-hidden className="absolute -bottom-[9%] left-1/2 h-[10%] w-[85%] -translate-x-1/2" style={{ background: `radial-gradient(closest-side, ${m.fg}, transparent)`, opacity: 0.3 }} />
                 <div className="relative h-full w-full animate-[mood-float_7s_ease-in-out_infinite] motion-reduce:animate-none" style={{ animationDelay: `${-i * 1.4}s` }}>
                   <Image src={m.image} alt={`${m.name} packaging`} fill sizes="(min-width: 1024px) 34vw, 45vw"
                     className="object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.25)]" />

@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { finishIntro } from "@/lib/intro";
+import { lockScroll } from "@/lib/scrollLock";
 
 const letters = (w: string) => w.split("").map((c, i) => <span key={i} data-ch aria-hidden className="inline-block">{c}</span>);
 
@@ -15,9 +16,9 @@ export default function Intro() {
     let seen = false;
     try { seen = sessionStorage.getItem("ac-intro") === "1"; } catch {}
     if (seen || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { el.style.display = "none"; finishIntro(); return; }
-    const html = document.documentElement; const prev = html.style.overflow; html.style.overflow = "hidden";
+    const unlock = lockScroll();
     const ctx = gsap.context(() => {
-      const t = gsap.timeline({ onComplete: () => { el.style.display = "none"; try { sessionStorage.setItem("ac-intro", "1"); } catch {} finishIntro(); } });
+      const t = gsap.timeline({ onComplete: () => { el.style.display = "none"; unlock(); try { sessionStorage.setItem("ac-intro", "1"); } catch {} finishIntro(); } });
       t.fromTo("[data-ring]", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, 0)
        .to("[data-orbit]", { rotation: 360, svgOrigin: "100 100", duration: 3, ease: "none" }, 0)
        .from("[data-ch]", { yPercent: 115, duration: 0.9, ease: "power4.out", stagger: 0.035 }, 0.2)
@@ -25,10 +26,9 @@ export default function Intro() {
        .to(el, { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, 1.7);
       tl.current = t;
     }, el);
-    return () => { ctx.revert(); html.style.overflow = prev; };
+    return () => { ctx.revert(); unlock(); };
   }, []);
 
-  useEffect(() => () => { document.documentElement.style.overflow = ""; }, []);
   const done = () => { if (tl.current) { tl.current.timeScale(5); } };
 
   return (<>

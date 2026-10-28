@@ -26,7 +26,7 @@ export const moods: Mood[] = [
     fg: "#0B1530",
     accent: "#2C4A8A",
     image: "/main-images/focus-final.webp",
-    recommendation: "A quiet, concentrated atmosphere: midnight tones and crisp edges.",
+    recommendation: "Best for work sessions, study and any moment you want to settle in and concentrate.",
   },
   {
     id: "uplift",
@@ -40,7 +40,7 @@ export const moods: Mood[] = [
     fg: "#2B1D10",
     accent: "#B5620A",
     image: "/main-images/uplift-final.webp",
-    recommendation: "A sunrise atmosphere: golden light and gentle shadows.",
+    recommendation: "Best for mornings and fresh starts, when you want the day to begin on a bright note.",
   },
   {
     id: "calm",
@@ -54,7 +54,7 @@ export const moods: Mood[] = [
     fg: "#1B3B50",
     accent: "#4A93C4",
     image: "/main-images/calm-final.webp",
-    recommendation: "A misty atmosphere: soft blue and open space.",
+    recommendation: "Best for slower moments: a quiet break, a reading hour, or winding down.",
   },
   {
     id: "energize",
@@ -63,12 +63,12 @@ export const moods: Mood[] = [
     headline: "Meet the moment.",
     description: "For demanding days, ambitious plans, and everything that needs your attention.",
     cta: "Explore Energize",
-    choice: "I'm ready to take on the day.",
+    choice: "I’m ready to take on the day.",
     bg: "#F9D9BF",
     fg: "#3A1A08",
     accent: "#C8470F",
     image: "/main-images/energize-final.webp",
-    recommendation: "A high-contrast atmosphere: burnt orange and confident motion.",
+    recommendation: "Best for busy days, early starts and anything that needs your full attention.",
   },
   {
     id: "indulge",
@@ -82,6 +82,6 @@ export const moods: Mood[] = [
     fg: "#3A1512",
     accent: "#8A2B3A",
     image: "/main-images/indulge-final.webp",
-    recommendation: "An intimate atmosphere: chocolate, burgundy and caramel light.",
+    recommendation: "Best for unhurried treats: weekend mornings, after dinner, or whenever you want to take your time.",
   },
 ];

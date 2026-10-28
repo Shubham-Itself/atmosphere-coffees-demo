@@ -1,5 +1,8 @@
 import type { MoodId } from "@/lib/moods";
-/** Pure-CSS art direction per mood (light, optimistic palette). */
+/**
+ * Pure-CSS art direction per mood (light, optimistic palette).
+ * Soft shapes use radial gradients, not CSS blur(): iOS Safari can paint large blurred layers as black squares.
+ */
 export default function MoodArt({ id, accent }: { id: MoodId; accent: string }) {
   const wrap = "pointer-events-none absolute inset-0 overflow-hidden";
   switch (id) {
@@ -15,8 +18,8 @@ export default function MoodArt({ id, accent }: { id: MoodId; accent: string }) 
       </div>);
     case "calm": return (
       <div aria-hidden className={wrap}>
-        <div className="absolute -left-[10%] top-[10%] h-[60vmin] w-[70vmin] rounded-[50%] blur-3xl" style={{ background: "#EEF2E8" }} />
-        <div className="absolute -right-[5%] bottom-0 h-[50vmin] w-[60vmin] rounded-[50%] blur-3xl" style={{ background: accent, opacity: 0.3 }} />
+        <div className="absolute -left-[16%] top-[4%] h-[72vmin] w-[84vmin]" style={{ background: "radial-gradient(closest-side, #EEF2E8, #EEF2E800)" }} />
+        <div className="absolute -right-[11%] -bottom-[6%] h-[62vmin] w-[72vmin]" style={{ background: `radial-gradient(closest-side, ${accent}, ${accent}00)`, opacity: 0.3 }} />
       </div>);
     case "energize": return (
       <div aria-hidden className={wrap}>
@@ -25,7 +28,7 @@ export default function MoodArt({ id, accent }: { id: MoodId; accent: string }) 
       </div>);
     case "indulge": return (
       <div aria-hidden className={wrap} style={{ background: "radial-gradient(ellipse at 70% 40%, #F3C9B0 0%, #EBD5C4 65%)" }}>
-        <div className="absolute right-[12%] top-[28%] aspect-square w-[22vmin] rounded-full blur-2xl" style={{ background: accent, opacity: 0.35 }} />
+        <div className="absolute right-[8%] top-[24%] aspect-square w-[30vmin]" style={{ background: `radial-gradient(closest-side, ${accent}, ${accent}00)`, opacity: 0.35 }} />
       </div>);
   }
 }

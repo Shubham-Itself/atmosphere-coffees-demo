@@ -4,7 +4,7 @@ import { gsap } from "@/lib/gsap";
 import { moods } from "@/lib/moods";
 import Reveal from "@/components/ui/Reveal";
 
-const pillars = ["Product positioning", "Visual storytelling", "Everyday rituals"];
+const pillars = ["Chosen by how you feel", "A mood for every part of your day", "Small rituals, made your own"];
 const R = 74, SEG = 360 / moods.length, GAP = 4;
 const pt = (deg: number, r: number) => { const a = ((deg - 90) * Math.PI) / 180; return `${(r * Math.cos(a)).toFixed(2)} ${(r * Math.sin(a)).toFixed(2)}`; };
 
@@ -57,7 +57,7 @@ export default function BrandStorySection() {
     <section id="about" aria-labelledby="about-h" className="overflow-hidden bg-cream text-espresso">
       <div className="px-[6vw] pt-32 md:pt-[22vh]">
         <Reveal className="flex flex-col gap-6">
-          <p className="label flex items-center gap-3 text-caramel"><span aria-hidden className="h-px w-8 bg-current" />About</p>
+          <p className="label flex items-center gap-3 text-caramel"><span aria-hidden className="h-px w-8 bg-current" />About us</p>
           <h1 id="about-h" className="display max-w-5xl text-[clamp(2.75rem,8vw,8rem)]">Designed around <em className="text-caramel">how you feel.</em></h1>
         </Reveal>
 
@@ -69,7 +69,7 @@ export default function BrandStorySection() {
               <blockquote className="display text-[clamp(2rem,3.8vw,3.75rem)] italic">
                 <span aria-hidden className="-ml-[0.45em] text-caramel">“</span>What if coffee could be chosen by the mood you want to create?<span aria-hidden className="text-caramel">”</span>
               </blockquote>
-              <p className="max-w-lg text-lg leading-relaxed opacity-80">That idea became a different way to think about coffee, bringing together product positioning, visual storytelling, and the everyday rituals that make each day feel different.</p>
+              <p className="max-w-lg text-lg leading-relaxed opacity-80">That question became five coffees, each matched to a feeling: something to help you focus, brighten your morning, find some calm, power through a busy day, or simply take your time.</p>
             </Reveal>
             <Reveal className="mt-12">
               <ul className="border-t border-espresso/15">
